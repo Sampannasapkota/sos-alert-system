@@ -38,7 +38,7 @@ public class DeviceServiceImpl implements DeviceService {
                 .build();
 
         Device savedDevice = deviceRepository.save(device);
-        return DeviceMapper.MapToResponse(savedDevice);
+        return DeviceMapper.mapToResponse(savedDevice);
     }
 
     @Override
@@ -50,14 +50,14 @@ public class DeviceServiceImpl implements DeviceService {
             log.error("Device not found of id {}", deviceId);
             return new DeviceNotFoundException("Device not found.");
         });
-        return DeviceMapper.MapToResponse(device);
+        return DeviceMapper.mapToResponse(device);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<DeviceResponseDto> getAllDevice(Pageable pageable) {
         return deviceRepository.findAll(pageable)
-                .map(DeviceMapper::MapToResponse);
+                .map(DeviceMapper::mapToResponse);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class DeviceServiceImpl implements DeviceService {
 
         Device updatedDevice = deviceRepository.save(device);
 
-        return DeviceMapper.MapToResponse(updatedDevice);
+        return DeviceMapper.mapToResponse(updatedDevice);
     }
 
     @Override

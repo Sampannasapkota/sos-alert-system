@@ -4,8 +4,12 @@ import com.hgn.sosalert.feature.device.entity.Device;
 import com.hgn.sosalert.feature.device.resource.request.DeviceRequestDto;
 import com.hgn.sosalert.feature.device.resource.response.DeviceResponseDto;
 
-public class DeviceMapper {
-    public static DeviceResponseDto MapToResponse(Device device) {
+public final class DeviceMapper {
+
+    private DeviceMapper() {
+    }
+
+    public static DeviceResponseDto mapToResponse(Device device) {
         return new DeviceResponseDto(
                 device.getId(),
                 device.getVersion(),
@@ -17,7 +21,7 @@ public class DeviceMapper {
         );
     }
 
-    public static Device MapToDevice(DeviceRequestDto requestDto) {
+    public static Device mapToEntity(DeviceRequestDto requestDto) {
         Device device = new Device();
         device.setDeviceCode(requestDto.getDeviceCode());
         device.setDisplayName(requestDto.getDisplayName());
