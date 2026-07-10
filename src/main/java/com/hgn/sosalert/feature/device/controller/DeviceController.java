@@ -7,17 +7,20 @@ import com.hgn.sosalert.shared.enums.ResponseStatus;
 import com.hgn.sosalert.shared.response.ApiResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/devices")
 @RequiredArgsConstructor
 public class DeviceController {
     private final DeviceService deviceService;
 
-    @PostMapping("/device")
+    @PostMapping
     public ApiResponseDto<DeviceResponseDto> createDevice(@Valid @RequestBody DeviceRequestDto deviceRequestDto) {
 
         return new ApiResponseDto<>(ResponseStatus.SUCCESS.value,
@@ -26,7 +29,10 @@ public class DeviceController {
     }
 
     @GetMapping
-    public ApiResponseDto<Page<DeviceResponseDto>> getAllDevices(Pageable pageable) {
+    public ApiResponseDto<Page<DeviceResponseDto>> getAllDevices(
+            @ParameterObject
+            @PageableDefault(page = 0, size = 10, sort = "createdAt", direction = Sort.Direction.DESC)
+            Pageable pageable) {
         return new ApiResponseDto<>(
                 ResponseStatus.SUCCESS.name(),
                 "Devices fetched successfully",
@@ -61,7 +67,7 @@ public class DeviceController {
 
         return new ApiResponseDto<>(
                 ResponseStatus.SUCCESS.name(),
-                "Device deleted successfully"
+                "Device deactivated successfully"
         );
     }
 
