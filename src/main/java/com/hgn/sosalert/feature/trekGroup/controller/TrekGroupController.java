@@ -1,7 +1,7 @@
 package com.hgn.sosalert.feature.trekGroup.controller;
 
-import com.hgn.sosalert.feature.trekGroup.resource.TrekGroupRequestDto;
-import com.hgn.sosalert.feature.trekGroup.resource.TrekGroupResponseDto;
+import com.hgn.sosalert.feature.trekGroup.resource.request.TrekGroupRequestDto;
+import com.hgn.sosalert.feature.trekGroup.resource.response.TrekGroupResponseDto;
 import com.hgn.sosalert.feature.trekGroup.service.TrekGroupService;
 import com.hgn.sosalert.shared.enums.ResponseStatus;
 import com.hgn.sosalert.shared.response.ApiResponseDto;

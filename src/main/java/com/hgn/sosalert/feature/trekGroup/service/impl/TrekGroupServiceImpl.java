@@ -5,8 +5,8 @@ import com.hgn.sosalert.feature.trekGroup.exception.TrekGroupAlreadyExistsExcept
 import com.hgn.sosalert.feature.trekGroup.exception.TrekGroupNotFoundException;
 import com.hgn.sosalert.feature.trekGroup.mapper.TrekGroupMapper;
 import com.hgn.sosalert.feature.trekGroup.repository.TrekGroupRepository;
-import com.hgn.sosalert.feature.trekGroup.resource.TrekGroupRequestDto;
-import com.hgn.sosalert.feature.trekGroup.resource.TrekGroupResponseDto;
+import com.hgn.sosalert.feature.trekGroup.resource.request.TrekGroupRequestDto;
+import com.hgn.sosalert.feature.trekGroup.resource.response.TrekGroupResponseDto;
 import com.hgn.sosalert.feature.trekGroup.service.TrekGroupService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

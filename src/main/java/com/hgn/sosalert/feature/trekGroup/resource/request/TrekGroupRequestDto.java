@@ -1,4 +1,4 @@
-package com.hgn.sosalert.feature.trekGroup.resource;
+package com.hgn.sosalert.feature.trekGroup.resource.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
