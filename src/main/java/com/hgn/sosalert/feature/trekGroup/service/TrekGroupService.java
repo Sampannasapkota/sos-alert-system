@@ -1,7 +1,7 @@
 package com.hgn.sosalert.feature.trekGroup.service;
 
-import com.hgn.sosalert.feature.trekGroup.resource.TrekGroupRequestDto;
-import com.hgn.sosalert.feature.trekGroup.resource.TrekGroupResponseDto;
+import com.hgn.sosalert.feature.trekGroup.resource.request.TrekGroupRequestDto;
+import com.hgn.sosalert.feature.trekGroup.resource.response.TrekGroupResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

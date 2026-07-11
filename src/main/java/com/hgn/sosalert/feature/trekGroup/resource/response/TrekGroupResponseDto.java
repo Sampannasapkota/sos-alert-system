@@ -1,4 +1,4 @@
-package com.hgn.sosalert.feature.trekGroup.resource;
+package com.hgn.sosalert.feature.trekGroup.resource.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
