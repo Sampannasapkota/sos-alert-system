@@ -1,6 +1,8 @@
 package com.hgn.sosalert.common.exception;
 
 import com.hgn.sosalert.feature.device.exception.DeviceAlreadyExistsException;
+import com.hgn.sosalert.feature.order.exception.OrderAlreadyExistsException;
+import com.hgn.sosalert.feature.order.exception.OrderNotFoundException;
 import com.hgn.sosalert.feature.trekGroup.exception.TrekGroupAlreadyExistsException;
 import com.hgn.sosalert.feature.trekGroup.exception.TrekGroupNotFoundException;
 import com.hgn.sosalert.feature.trekker.exception.TrekkerNotFoundException;
@@ -49,5 +51,18 @@ public class GlobalExceptionHandler {
         log.error("Trekker not found.", ex);
         return buildErrorResponse("Trekker not found", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ApiResponseDto<?>> handleOrderNotFoundException(OrderNotFoundException ex) {
+        log.error("Order not found.", ex);
+        return buildErrorResponse("Order not found", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(OrderAlreadyExistsException.class)
+    public ResponseEntity<ApiResponseDto<?>> handleOrderAlreadyExistsException(OrderAlreadyExistsException ex) {
+        log.error("Order already exists.", ex);
+        return buildErrorResponse("Order already exists.", HttpStatus.BAD_REQUEST);
+    }
+
 
 }
