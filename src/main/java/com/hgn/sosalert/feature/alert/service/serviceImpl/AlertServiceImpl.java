@@ -1,11 +1,14 @@
 package com.hgn.sosalert.feature.alert.service.serviceImpl;
 
 import com.hgn.sosalert.feature.alert.entity.Alert;
+import com.hgn.sosalert.feature.alert.enums.AlertStatus;
 import com.hgn.sosalert.feature.alert.exception.AlertAssignmentAmbiguousException;
 import com.hgn.sosalert.feature.alert.exception.AlertAssignmentNotFoundException;
+import com.hgn.sosalert.feature.alert.exception.AlertConflictException;
 import com.hgn.sosalert.feature.alert.exception.AlertNotFoundException;
 import com.hgn.sosalert.feature.alert.mapper.AlertMapper;
 import com.hgn.sosalert.feature.alert.repository.AlertRepository;
+import com.hgn.sosalert.feature.alert.resource.request.AlertClaimRequestDto;
 import com.hgn.sosalert.feature.alert.resource.request.AlertRequestDto;
 import com.hgn.sosalert.feature.alert.resource.response.AlertResponseDto;
 import com.hgn.sosalert.feature.alert.service.AlertService;
@@ -93,6 +96,37 @@ public class AlertServiceImpl implements AlertService {
     public Page<AlertResponseDto> getAllAlerts(Pageable pageable) {
         return alertRepository.findAll(pageable)
                 .map(AlertMapper::mapToResponse);
+    }
+
+    @Override
+    public AlertResponseDto claimAlert(Long alertId, AlertClaimRequestDto requestDto) {
+
+        Alert alert = alertRepository.findByIdForUpdate(alertId)
+                .orElseThrow(() -> {
+                    log.error("SOS alert not found while claiming ={}", alertId);
+                    throw new AlertNotFoundException("Alert not found.");
+                });
+        if (alert.getStatus() == AlertStatus.CLAIMED) {
+            log.error("SOS alert has already been claimed ={}", alertId);
+            throw new AlertConflictException(
+                    "SOS alert has already been claimed."
+            );
+        }
+
+        if (alert.getStatus() == AlertStatus.RESOLVED) {
+            log.error("SOS alert cannot be claimed ={}", alertId);
+            throw new AlertConflictException(
+                    "Resolved SOS alert cannot be claimed."
+            );
+        }
+
+        alert.setStatus(AlertStatus.CLAIMED);
+        alert.setClaimedBy(
+                requestDto.getCoordinatorName().trim()
+        );
+        alert.setClaimedAt(LocalDateTime.now());
+
+        return AlertMapper.mapToResponse(alert);
     }
 
     private DeviceAssignment resolveAssignment(

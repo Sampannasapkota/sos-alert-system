@@ -1,5 +1,6 @@
 package com.hgn.sosalert.feature.alert.controller;
 
+import com.hgn.sosalert.feature.alert.resource.request.AlertClaimRequestDto;
 import com.hgn.sosalert.feature.alert.resource.request.AlertRequestDto;
 import com.hgn.sosalert.feature.alert.resource.response.AlertResponseDto;
 import com.hgn.sosalert.feature.alert.service.AlertService;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,6 +31,19 @@ public class AlertController {
                 ResponseStatus.SUCCESS.name(),
                 "SOS alert received successfully",
                 alertService.receiveAlert(requestDto)
+        );
+    }
+
+    @PostMapping("/{id}/claim")
+    @Transactional
+    public ApiResponseDto<AlertResponseDto> claimAlert(
+            @PathVariable Long id,
+            @Valid @RequestBody AlertClaimRequestDto requestDto
+    ) {
+        return new ApiResponseDto<>(
+                ResponseStatus.SUCCESS.name(),
+                "SOS alert claimed successfully",
+                alertService.claimAlert(id, requestDto)
         );
     }
 

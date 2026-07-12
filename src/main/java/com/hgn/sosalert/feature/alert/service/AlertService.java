@@ -1,5 +1,6 @@
 package com.hgn.sosalert.feature.alert.service;
 
+import com.hgn.sosalert.feature.alert.resource.request.AlertClaimRequestDto;
 import com.hgn.sosalert.feature.alert.resource.request.AlertRequestDto;
 import com.hgn.sosalert.feature.alert.resource.response.AlertResponseDto;
 import org.springframework.data.domain.Page;
@@ -14,5 +15,10 @@ public interface AlertService {
 
     Page<AlertResponseDto> getAllAlerts(
             Pageable pageable
+    );
+
+    AlertResponseDto claimAlert(
+            Long alertId,
+            AlertClaimRequestDto requestDto
     );
 }
