@@ -129,6 +129,39 @@ public class AlertServiceImpl implements AlertService {
         return AlertMapper.mapToResponse(alert);
     }
 
+    @Override
+    @Transactional
+    public AlertResponseDto resolveAlert(Long alertId) {
+
+        Alert alert = alertRepository.findByIdForUpdate(alertId)
+                .orElseThrow(() ->
+                        new AlertNotFoundException(
+                                "SOS alert not found."
+                        ));
+
+        if (alert.getStatus() == AlertStatus.RESOLVED) {
+            throw new AlertConflictException(
+                    "SOS alert is already resolved."
+            );
+        }
+
+        if (alert.getStatus() != AlertStatus.CLAIMED) {
+            throw new AlertConflictException(
+                    "Only claimed alerts can be resolved."
+            );
+        }
+
+        alert.setStatus(AlertStatus.RESOLVED);
+        alert.setResolvedAt(LocalDateTime.now());
+
+        log.info(
+                "SOS alert resolved. alertId={}",
+                alertId
+        );
+
+        return AlertMapper.mapToResponse(alert);
+    }
+
     private DeviceAssignment resolveAssignment(
             Long deviceId,
             LocalDateTime alertTimestamp

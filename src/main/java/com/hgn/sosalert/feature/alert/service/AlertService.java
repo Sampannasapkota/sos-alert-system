@@ -21,4 +21,5 @@ public interface AlertService {
             Long alertId,
             AlertClaimRequestDto requestDto
     );
+    AlertResponseDto resolveAlert(Long alertId);
 }
