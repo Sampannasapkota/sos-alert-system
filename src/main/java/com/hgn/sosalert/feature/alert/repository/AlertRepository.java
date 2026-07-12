@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public interface AlertRepository extends JpaRepository<Alert, Long> {
@@ -45,5 +46,17 @@ public interface AlertRepository extends JpaRepository<Alert, Long> {
             """)
     Optional<Alert> findByIdForUpdate(
             @Param("alertId") Long alertId
+    );
+
+    //for alert escalation
+    @Query("""
+            select alert
+            from Alert alert
+            where alert.status = :status
+              and alert.createdAt <= :threshold
+            """)
+    List<Alert> findAlertsForEscalation(
+            @Param("status") AlertStatus status,
+            @Param("threshold") LocalDateTime threshold
     );
 }
