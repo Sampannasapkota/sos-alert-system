@@ -47,6 +47,18 @@ public class AlertController {
         );
     }
 
+    @PostMapping("/{id}/resolve")
+    public ApiResponseDto<AlertResponseDto> resolveAlert(
+            @PathVariable Long id
+    ) {
+
+        return new ApiResponseDto<>(
+                ResponseStatus.SUCCESS.name(),
+                "SOS alert resolved successfully",
+                alertService.resolveAlert(id)
+        );
+    }
+
     @GetMapping("/{id}")
     public ApiResponseDto<AlertResponseDto> getAlertById(
             @PathVariable Long id
