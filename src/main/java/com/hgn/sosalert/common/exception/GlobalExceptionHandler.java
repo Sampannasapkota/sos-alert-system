@@ -1,5 +1,8 @@
 package com.hgn.sosalert.common.exception;
 
+import com.hgn.sosalert.feature.alert.exception.AlertAssignmentAmbiguousException;
+import com.hgn.sosalert.feature.alert.exception.AlertAssignmentNotFoundException;
+import com.hgn.sosalert.feature.alert.exception.AlertNotFoundException;
 import com.hgn.sosalert.feature.device.exception.DeviceAlreadyExistsException;
 import com.hgn.sosalert.feature.device.exception.DeviceNotFoundException;
 import com.hgn.sosalert.feature.deviceAssignment.exception.AssignmentConflictException;
@@ -44,7 +47,6 @@ public class GlobalExceptionHandler {
     }
 
 
-
     @ExceptionHandler(TrekGroupAlreadyExistsException.class)
     public ResponseEntity<ApiResponseDto<?>> handleTrekGroupAlreadyExistsException(TrekGroupAlreadyExistsException ex) {
         log.error("Trek group already exists.", ex);
@@ -85,6 +87,30 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponseDto<?>> handleAssignmentConflictException(DeviceAssignmentNotFoundException ex) {
         log.error("Device assignment not found.", ex);
         return buildErrorResponse("Device assignment not found.", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AlertAssignmentNotFoundException.class)
+    public ResponseEntity<ApiResponseDto<?>> handleAlertAssignmentConflictException(AlertAssignmentNotFoundException ex) {
+        log.error("Alert assignment not found. {}", ex.getMessage());
+        return buildErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AlertAssignmentAmbiguousException.class)
+    public ResponseEntity<ApiResponseDto<?>> handleAlertAssignmentAmbiguousException(AlertAssignmentAmbiguousException ex) {
+        log.error("Alert assignment ambiguity. {}", ex.getMessage());
+        return buildErrorResponse(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(AlertNotFoundException.class)
+    public ResponseEntity<ApiResponseDto<?>> handleAlertNotFoundException(AlertNotFoundException ex) {
+        log.error("Alert not found. {}", ex.getMessage());
+        return buildErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiResponseDto<?>> handleIllegalArgumentException(IllegalArgumentException ex) {
+        log.error("Invalid request. {}", ex.getMessage());
+        return buildErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 
