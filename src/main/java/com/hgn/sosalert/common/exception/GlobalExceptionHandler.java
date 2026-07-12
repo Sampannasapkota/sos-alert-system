@@ -2,6 +2,7 @@ package com.hgn.sosalert.common.exception;
 
 import com.hgn.sosalert.feature.alert.exception.AlertAssignmentAmbiguousException;
 import com.hgn.sosalert.feature.alert.exception.AlertAssignmentNotFoundException;
+import com.hgn.sosalert.feature.alert.exception.AlertConflictException;
 import com.hgn.sosalert.feature.alert.exception.AlertNotFoundException;
 import com.hgn.sosalert.feature.device.exception.DeviceAlreadyExistsException;
 import com.hgn.sosalert.feature.device.exception.DeviceNotFoundException;
@@ -110,6 +111,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiResponseDto<?>> handleIllegalArgumentException(IllegalArgumentException ex) {
         log.error("Invalid request. {}", ex.getMessage());
+        return buildErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AlertConflictException.class)
+    public ResponseEntity<ApiResponseDto<?>> handleAlertConflictException(AlertConflictException ex) {
+        log.error("Alert Conflict. {}", ex.getMessage());
         return buildErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
