@@ -64,7 +64,7 @@ src
 ```bash
 git clone https://github.com/Sampannasapkota/hgn-assessment-sampanna-sapkota.git
 
-cd hgn-assessment-sampanna-sapkota
+cd sos-alert-system
 ```
 
 ### 2. Create environment file
