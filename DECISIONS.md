@@ -72,34 +72,6 @@ Trekkers belong to a TrekGroup because the assessment states that multiple trekk
 
 ---
 
-# Device Ambiguity
-
-The assessment specifically mentions that a device may belong to multiple orders over time.
-
-To determine the correct order for an incoming SOS, the system searches the DeviceAssignment table using:
-
-- Device ID
-- Alert Timestamp
-
-A valid assignment satisfies:
-
-```
-assignedFrom <= alertTimestamp
-
-AND
-
-assignedUntil >= alertTimestamp
-```
-
-(or assignedUntil is null)
-
-If no assignment matches, the request is rejected.
-
-If multiple assignments match, the request is rejected because the system cannot safely determine which order owns the alert.
-
-To avoid this situation, overlapping device assignments are prevented when creating or updating assignments.
-
----
 
 # Deduplication
 
@@ -119,9 +91,6 @@ In a production system this threshold should be configurable rather than hardcod
 
 # Concurrency
 
-The assessment requires that two coordinators cannot claim the same alert simultaneously.
-
-To guarantee this, I used pessimistic locking.
 
 The repository exposes a method that retrieves an alert using `PESSIMISTIC_WRITE`.
 
@@ -171,22 +140,6 @@ Examples include:
 - SOS alerts require a valid assignment.
 - Duplicate alerts are ignored.
 - Only claimed alerts may be resolved.
-
----
-
-# Trade-offs
-
-Because this is a take-home assessment, I intentionally chose simpler solutions where appropriate.
-
-For example:
-
-- No authentication or authorization.
-- No notification service (SMS, Email, Push).
-- Single application instead of microservices.
-- Scheduler instead of distributed job processing.
-- PostgreSQL only without Redis caching.
-
-These decisions reduce complexity while keeping the core requirements fully implemented.
 
 ---
 

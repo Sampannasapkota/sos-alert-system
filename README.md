@@ -62,7 +62,7 @@ src
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Sampannasapkota/hgn-assessment-sampanna-sapkota.git
+git clone https://github.com/Sampannasapkota/sos-alert-system.git
 
 cd sos-alert-system
 ```

@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+// ─── Design Tokens ────────────────────────────────────────────────────────────
+:root {
+  --bg-base:       #080d1a;
+  --bg-surface:    #0f1629;
+  --bg-card:       #141d35;
+  --bg-elevated:   #1a2440;
+  --border-subtle: rgba(255,255,255,0.07);
+  --border-medium: rgba(255,255,255,0.13);
+
+  --color-danger:  #ef4444;
+  --color-warn:    #f59e0b;
+  --color-success: #10b981;
+  --color-info:    #6366f1;
+  --color-muted:   #64748b;
+  --color-text:    #e2e8f0;
+  --color-text-dim:#94a3b8;
+
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-glow-red: 0 0 20px rgba(239,68,68,0.25);
+  --radius-card: 12px;
+  --sidebar-width: 240px;
+}
+
+// ─── Base Reset ───────────────────────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  height: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-base);
+  color: var(--color-text);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ─── PrimeNG Overrides ────────────────────────────────────────────────────────
+.p-component { font-family: 'Inter', system-ui, sans-serif; }
+
+// Sidebar tweaks
+.p-sidebar { background: var(--bg-surface) !important; border-right: 1px solid var(--border-subtle) !important; }
+
+// Dialog
+.p-dialog { background: var(--bg-card) !important; border: 1px solid var(--border-medium) !important; border-radius: var(--radius-card) !important; }
+.p-dialog .p-dialog-header { background: var(--bg-card) !important; border-bottom: 1px solid var(--border-subtle) !important; padding: 1.25rem 1.5rem !important; }
+.p-dialog .p-dialog-content { background: var(--bg-card) !important; padding: 1.5rem !important; }
+.p-dialog .p-dialog-footer { background: var(--bg-card) !important; border-top: 1px solid var(--border-subtle) !important; padding: 1rem 1.5rem !important; }
+
+// Table
+.p-datatable .p-datatable-header { background: var(--bg-card) !important; border: none !important; border-bottom: 1px solid var(--border-subtle) !important; }
+.p-datatable .p-datatable-thead > tr > th { background: var(--bg-elevated) !important; border-color: var(--border-subtle) !important; color: var(--color-text-dim) !important; font-weight: 600; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.p-datatable .p-datatable-tbody > tr { background: var(--bg-card) !important; border-color: var(--border-subtle) !important; transition: background 0.2s; }
+.p-datatable .p-datatable-tbody > tr:hover { background: var(--bg-elevated) !important; }
+.p-datatable .p-datatable-tbody > tr > td { border-color: var(--border-subtle) !important; color: var(--color-text) !important; }
+.p-paginator { background: var(--bg-card) !important; border-top: 1px solid var(--border-subtle) !important; }
+
+// Input
+.p-inputtext { background: var(--bg-elevated) !important; border-color: var(--border-medium) !important; color: var(--color-text) !important; border-radius: 8px !important; }
+.p-inputtext:focus { border-color: var(--color-info) !important; box-shadow: 0 0 0 3px rgba(99,102,241,0.2) !important; }
+.p-dropdown { background: var(--bg-elevated) !important; border-color: var(--border-medium) !important; border-radius: 8px !important; }
+.p-dropdown .p-dropdown-label { color: var(--color-text) !important; }
+.p-dropdown-panel { background: var(--bg-elevated) !important; border: 1px solid var(--border-medium) !important; }
+.p-dropdown-panel .p-dropdown-item { color: var(--color-text) !important; }
+.p-dropdown-panel .p-dropdown-item:hover { background: var(--bg-base) !important; }
+.p-calendar .p-inputtext { background: var(--bg-elevated) !important; }
+.p-calendar-panel { background: var(--bg-elevated) !important; border: 1px solid var(--border-medium) !important; }
+
+// Buttons
+.p-button { border-radius: 8px !important; font-weight: 600 !important; transition: all 0.2s !important; }
+.p-button:not(.p-button-outlined):not(.p-button-text):not(.p-button-danger):not(.p-button-success):not(.p-button-warning) { background: var(--color-info) !important; border-color: var(--color-info) !important; }
+.p-button.p-button-danger { background: var(--color-danger) !important; border-color: var(--color-danger) !important; }
+.p-button.p-button-success { background: var(--color-success) !important; border-color: var(--color-success) !important; }
+.p-button.p-button-warning { background: var(--color-warn) !important; border-color: var(--color-warn) !important; color: #0f172a !important; }
+.p-button:hover { opacity: 0.88 !important; transform: translateY(-1px) !important; }
+.p-button:active { transform: translateY(0) !important; }
+
+// Toast
+.p-toast { font-family: 'Inter', sans-serif !important; }
+.p-toast .p-toast-message { border-radius: 10px !important; }
+
+// Tag
+.p-tag { border-radius: 6px !important; font-weight: 600 !important; font-size: 11px !important; letter-spacing: 0.05em !important; }
+
+// ─── Layout Utilities ─────────────────────────────────────────────────────────
+.page-header {
+  margin-bottom: 1.5rem;
+  h1 { font-size: 1.5rem; font-weight: 700; margin: 0 0 0.25rem; }
+  p { margin: 0; color: var(--color-text-dim); font-size: 0.875rem; }
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+// ─── Alert Row Pulse ──────────────────────────────────────────────────────────
+@keyframes pulse-row {
+  0%, 100% { background: var(--bg-card) !important; }
+  50% { background: rgba(239,68,68,0.08) !important; }
+}
+
+.row-received { animation: pulse-row 2.5s ease-in-out infinite; }
+.row-escalated td { color: var(--color-warn) !important; }
+
+// ─── Stat Card Glow ───────────────────────────────────────────────────────────
+.stat-danger { box-shadow: var(--shadow-glow-red), var(--shadow-card) !important; border-color: rgba(239,68,68,0.3) !important; }
+.stat-warn   { box-shadow: 0 0 20px rgba(245,158,11,0.2), var(--shadow-card) !important; border-color: rgba(245,158,11,0.3) !important; }
+.stat-success{ box-shadow: 0 0 20px rgba(16,185,129,0.15), var(--shadow-card) !important; }
+.stat-info   { box-shadow: 0 0 20px rgba(99,102,241,0.15), var(--shadow-card) !important; }
+
+// ─── Scrollbar ────────────────────────────────────────────────────────────────
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
