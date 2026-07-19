@@ -39,13 +39,6 @@ interface NavItem {
           </a>
         </li>
       </ul>
-
-      <div class="sidebar-footer">
-        <div class="footer-status">
-          <span class="status-dot"></span>
-          <span>Backend: localhost:8080</span>
-        </div>
-      </div>
     </nav>
   `,
   styles: [`
