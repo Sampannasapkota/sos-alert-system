@@ -225,7 +225,7 @@ public class AlertServiceImpl implements AlertService {
     private void validateAlertTimestamp(
             LocalDateTime alertTimestamp
     ) {
-        if (alertTimestamp.isAfter(LocalDateTime.now())) {
+        if (alertTimestamp.isAfter(LocalDateTime.now().plusDays(1))) {
             throw new IllegalArgumentException(
                     "Alert timestamp cannot be in the future."
             );
