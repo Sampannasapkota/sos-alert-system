@@ -53,5 +53,16 @@ services:
     ports:
       - "${SERVER_PORT}:8080"
 
+  ui:
+    build:
+      context: ./sos-alert-ui
+      dockerfile: Dockerfile
+    container_name: hgn-sos-alert-ui
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+
 volumes:
   postgres_data:

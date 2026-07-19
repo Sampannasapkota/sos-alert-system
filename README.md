@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a Spring Boot backend service developed for the Himalayan Guardian Nepal.
+This project is a Spring Boot backend service.
 
 The service simulates SOS alerts sent from GPS/satellite tracking devices used during trekking expeditions. It supports device assignment management, alert intake, duplicate detection, concurrency-safe alert claiming, and automatic escalation of unacknowledged alerts.
 
@@ -62,9 +62,9 @@ src
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Sampannasapkota/hgn-assessment-sampanna-sapkota.git
+git clone https://github.com/Sampannasapkota/sos-alert-system.git
 
-cd hgn-assessment-sampanna-sapkota
+cd sos-alert-system
 ```
 
 ### 2. Create environment file

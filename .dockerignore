@@ -6,3 +6,4 @@ target/
 *.iml
 .env
 *.log
+sos-alert-ui/
